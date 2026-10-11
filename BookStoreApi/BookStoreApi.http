@@ -1,0 +1,35 @@
+@host = http://localhost:5275
+
+### 1. Get all books
+GET {{host}}/api/books
+Accept: application/json
+
+### 2. Create a book (POST)
+# @name createBook
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "Name": "The Pragmatic Programmer",
+  "Price": 39.99,
+  "Category": "Computers",
+  "Author": "Andrew Hunt"
+}
+
+### 3. Get the new book
+GET {{host}}/api/books/{{createBook.response.body.$.Id}}
+Accept: application/json
+
+### 4. Update it (PUT)
+PUT {{host}}/api/books/{{createBook.response.body.$.Id}}
+Content-Type: application/json
+
+{
+  "Name": "The Pragmatic Programmer",
+  "Price": 29.99,
+  "Category": "Computers",
+  "Author": "Andrew Hunt"
+}
+
+### 5. Delete it
+DELETE {{host}}/api/books/{{createBook.response.body.$.Id}}
